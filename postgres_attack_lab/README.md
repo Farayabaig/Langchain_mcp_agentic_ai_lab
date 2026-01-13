@@ -63,9 +63,9 @@ Malicious user input: `"Show sales for customer ' UNION SELECT username, passwor
    ```bash
    cd postgres_attack_lab
    # Copy and edit .env file (or set environment variables)
-   export LITELLM_BASE_URL=https://llm.bluerock.dev
+   export LITELLM_BASE_URL=https://your-llm-provider.com
    export LITELLM_API_KEY=sk-your-key-here
-   export LITELLM_MODEL=gpt-5.2
+   export LITELLM_MODEL=your-model-name
    ```
 
 2. **Build and run with Docker Compose**:
