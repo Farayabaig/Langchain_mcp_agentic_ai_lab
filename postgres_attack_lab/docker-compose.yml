@@ -1,0 +1,51 @@
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: postgres-attack-lab
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-attack_lab}
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-postgres} -d ${POSTGRES_DB:-attack_lab}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - attack-lab-network
+
+  streamlit-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: streamlit-attack-lab
+    env_file:
+      - ../.env
+    environment:
+      # These will be loaded from env_file, but we can override if needed
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PORT=5432
+      - POSTGRES_DB=attack_lab
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "8501:8501"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - attack-lab-network
+    # Optional: Uncomment volumes for development (hot-reload)
+    # volumes:
+    #   - ./app.py:/app/app.py
+    #   - ./agents.py:/app/agents.py
+    #   - ./database.py:/app/database.py
+
+networks:
+  attack-lab-network:
+    driver: bridge
+

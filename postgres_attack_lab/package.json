@@ -1,0 +1,14 @@
+{
+  "name": "postgres-mcp-server",
+  "version": "1.0.0",
+  "description": "Postgres MCP server for attack lab",
+  "type": "module",
+  "scripts": {
+    "start": "node -e \"import('@modelcontextprotocol/server-postgres/index.js').then(m => m.default())\""
+  },
+  "dependencies": {
+    "@modelcontextprotocol/server-postgres": "^0.5.0",
+    "@modelcontextprotocol/sdk": "^1.0.0"
+  }
+}
+
