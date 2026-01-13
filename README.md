@@ -17,9 +17,9 @@ A simple, minimal setup for LangChain agent-to-agent communication using Model C
    
    Edit `.env` with your actual values:
    ```
-   LITELLM_BASE_URL=https://llm.bluerock.dev
+   LITELLM_BASE_URL=https://your-llm-provider.com
    LITELLM_API_KEY=sk-your-key-here
-   LITELLM_MODEL=gpt-5.2
+   LITELLM_MODEL=your-model-name
    ```
 
 2. **Build and run with Docker Compose:**
@@ -77,9 +77,9 @@ docker build -t langchain-mcp-agent .
 docker run --env-file .env langchain-mcp-agent
 
 # Run with custom environment variables
-docker run -e LITELLM_BASE_URL=https://llm.bluerock.dev \
+docker run -e LITELLM_BASE_URL=https://your-llm-provider.com \
            -e LITELLM_API_KEY=sk-your-key \
-           -e LITELLM_MODEL=gpt-5.2 \
+           -e LITELLM_MODEL=your-model-name \
            langchain-mcp-agent
 ```
 
@@ -100,9 +100,9 @@ docker run -e LITELLM_BASE_URL=https://llm.bluerock.dev \
    
    Edit `.env` with your actual values:
    ```
-   LITELLM_BASE_URL=https://llm.bluerock.dev
+   LITELLM_BASE_URL=https://your-llm-provider.com
    LITELLM_API_KEY=sk-your-key-here
-   LITELLM_MODEL=gpt-5.2
+   LITELLM_MODEL=your-model-name
    ```
 
 3. **Run the agent communication example:**
